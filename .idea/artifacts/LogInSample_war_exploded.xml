@@ -1,20 +1,14 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="LogInSample:war exploded">
     <output-path>$PROJECT_DIR$/target/LogInSample-0.1-Test</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <exploded>true</exploded>
-        <module>LogInSample</module>
-        <packaging>war</packaging>
-      </options>
-    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="LogInSample" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:6.0.5" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.11" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:2.6.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">
