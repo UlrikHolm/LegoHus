@@ -14,6 +14,7 @@ public class Connector {
     private static final String URL = "jdbc:mysql://157.230.110.206:3306/lego?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false";
     private static final String USERNAME = "testuser";
     private static final String PASSWORD = "password123";
+    //Dette er en test
 
     private static Connection singleton;
 
