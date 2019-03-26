@@ -15,6 +15,7 @@ public class Connector {
     private static final String USERNAME = "testuser";
     private static final String PASSWORD = "password123";
     //Dette er en test
+    //hejhej
 
     private static Connection singleton;
 
