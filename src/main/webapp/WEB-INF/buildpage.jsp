@@ -69,7 +69,7 @@
                 <option value="0" disabled selected>Vælg værdi
                      <%
 
-                        for (int i = 8; i < 31 ; i++) {
+                        for (int i = 1; i < 21 ; i++) {
                         String heightOption = "";
                         //String navn = "width";
                         String tal = Integer.toString(i);

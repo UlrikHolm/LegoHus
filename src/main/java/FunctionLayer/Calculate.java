@@ -24,8 +24,14 @@ public class Calculate {
         int typeF = 0;
         int typeG = 0;
 
-        if (metode==1){typeF=1; typeG=2;}
-        if (metode==2){typeF=2; typeG=1;}
+        if (metode == 1) {
+            typeF = 1;
+            typeG = 2;
+        }
+        if (metode == 2) {
+            typeF = 2;
+            typeG = 1;
+        }
 
         result = antalBlocks(typeF, length, high);
 
@@ -39,11 +45,12 @@ public class Calculate {
         antalTwoG = antalTwoAll + result[1];
         antalOneG = antalOneAll + result[2];
 
-        sumBlocks[0] = 2*(antalFourF + antalFourG);
-        sumBlocks[1] = 2*(antalTwoF + antalTwoG);
-        sumBlocks[2] = 2*(antalOneF + antalOneG);
+        sumBlocks[0] = 2 * (antalFourF + antalFourG);
+        sumBlocks[1] = 2 * (antalTwoF + antalTwoG);
+        sumBlocks[2] = 2 * (antalOneF + antalOneG);
 
         return sumBlocks;
+    }
 
         /*System.out.println("Antal four-blok Facade = " + antalFourF);
         System.out.println("Antal two-blok Facade = " + antalTwoF);
@@ -59,6 +66,87 @@ public class Calculate {
         System.out.println("Antal two-blok = " + antalTwoAll);
         System.out.println("Antal one-blok = " + antalOneAll);
 */
+
+
+    public static String[] printAll(House house) {
+
+        int length = house.getLenght();
+        int width = house.getWidth();
+        int high = house.getHeight();
+        int metode = 1;
+
+        String[] prString = new String[4];
+        int typeF = 0;
+        int typeG = 0;
+
+        if (metode == 1) {
+            typeF = 1;
+            typeG = 2;
+        }
+        if (metode == 2) {
+            typeF = 2;
+            typeG = 1;
+        }
+
+        prString = printWall(typeF, length, high);
+
+        String smallLineF= prString[0];
+        String bigLineF = prString[1];
+        String smallF = prString[2];
+        String bigF = prString[3];
+
+        prString = printWall(typeG, width, high);
+
+        String smallLineG= prString[0];
+        String bigLineG = prString[1];
+        String smallG = prString[2];
+        String bigG = prString[3];
+
+        String[] printArray = new String[high+3];
+
+        int row = high/2;
+
+        String mellemRum ="";
+        for (int i = 0; i <length-5 ; i++) {
+            mellemRum=mellemRum+" ";
+        }
+        printArray[0] = "FACADE"+mellemRum+"                    "+"GAVL";
+
+        if (high % 2 == 0) {
+            if (metode == 1) printArray[1]=(smallLineF+"                    "+bigLineG);
+            if (metode == 2) printArray[1]=(bigLineF+"                    "+smallLineG);
+        } else {
+            if (metode == 1) {
+                printArray[1]=(bigLineF+"                    "+smallLineG);
+                printArray[2]=(bigF+"                    "+smallG);
+            }
+            if (metode == 2) {
+                printArray[1]=(smallLineF+"                    "+bigLineG);
+                printArray[2]=(smallF+"                    "+bigG);
+            }
+        }
+
+        for (int i = (2+high%2); i < 2*row+2+high%2; i=i+2) {
+                if (metode == 1) {
+                    printArray[i]=(smallF +"                    "+bigG);
+                    printArray[i+1]=(bigF+"                    "+smallG);
+                }
+
+                if (metode == 2) {
+                    printArray[i]=(bigF+"                    "+smallG);
+                    printArray[i+1]=(smallF+"                    "+bigG);
+                }
+        }
+
+        for (int i = 0; i < high+2 ; i++) {
+            System.out.println(printArray[i]);
+        }
+
+
+        return printArray;
+
+    }
+
 
         /*
 
@@ -115,7 +203,6 @@ public class Calculate {
             }
         }*/
 
-    }
 
 
     public static int[] antalBlocks(int type, int l, int h) {
@@ -147,7 +234,6 @@ public class Calculate {
                 smallRow = h / 2 + 1;
             }
         }
-        //System.out.println("bigRow = " + bigRow + "   smallRow = " + smallRow);
 
         rest = l % 4;
 
@@ -199,7 +285,7 @@ public class Calculate {
         return result;
     }
 
-    /*public static String[] printWall(int type, int l, int h) {
+    public static String[] printWall(int type, int l, int h) {
 
         final String four = "|___";
         final String two = "|_";
@@ -273,8 +359,6 @@ public class Calculate {
         return prString;
 
     }
-*/
-
 }
 
 

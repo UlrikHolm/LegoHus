@@ -38,6 +38,9 @@ public class HouseDim extends Command {
         session.setAttribute( "block2", sumBlocks[1]);
         session.setAttribute( "block1", sumBlocks[2]);
 
+        session.setAttribute("height", heightI);
+        session.setAttribute("printAll",Calculate.printAll(house));
+
         return "showblocks" + "page";
     }
 }

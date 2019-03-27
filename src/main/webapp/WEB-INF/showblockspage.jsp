@@ -35,6 +35,17 @@ To change this template use File | Settings | File Templates.
             <b>Antal blok 1 knop =  </b><%out.print(block1);%>
             </br>
 
+            <%
+                int height = (int) session.getAttribute("height");
+                String[] printAll = (String[]) session.getAttribute("printAll");
+                for (int i = 0; i <height+2 ; i++) {
+                    out.print(printAll[i]);
+            %>
+                    </br>
+            <%
+                }
+            %>
+
         </div>
     </div>
     <div class="row">
