@@ -3,8 +3,7 @@ package PresentationLayer;
 import DBAccess.OrderMapper;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Order;
-import FunctionLayer.OrderMaker;
-import com.mysql.cj.x.protobuf.MysqlxCrud;
+import FunctionLayer.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,20 +18,27 @@ public class OrderJ extends Command {
         System.out.println("Er i OrderJ");
 
         HttpSession session = request.getSession();
+
         int length = (int) session.getAttribute("length");
         int width = (int) session.getAttribute("width");
         int height = (int) session.getAttribute("height");
 
 
-        LocalDateTime timeNow = LocalDateTime.now();
-        String timeNowS = timeNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        if ((User) session.getAttribute("user") != null) {
 
-        session.getAttribute("user");
+            LocalDateTime timeNow = LocalDateTime.now();
+            String timeNowS = timeNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-        Order tempOorder =new Order(timeNowS,2,length, width, height,"no");
+            User tempuser = (User) session.getAttribute("user");
 
-        OrderMapper.createOrder(tempOorder);
+            Order tempOorder = new Order(timeNowS, tempuser.getId(), length, width, height, "no");
 
-        return "orderconfirm" + "page";
+            OrderMapper.createOrder(tempOorder);
+
+            return "orderconfirm" + "page";
+
+        } else {
+            return "index";
+        }
     }
 }

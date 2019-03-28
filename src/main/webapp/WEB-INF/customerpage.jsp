@@ -14,5 +14,21 @@
     <body>
         <h1>Hello <%=request.getParameter( "email" )%> </h1>
         You are now logged in as a customer of our wonderful site.
+        <td>
+            <form name="choice" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="choice">
+                Byg hus:<br>
+                <input type="submit" value="Submit">
+            </form>
+        </td>
+
+        <td>
+            <form name="choice" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="showorder">
+                Vis order:<br>
+                <input type="submit" value="Submit">
+            </form>
+        </td>
+
     </body>
 </html>

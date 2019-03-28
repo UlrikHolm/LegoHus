@@ -15,8 +15,8 @@ abstract class Command {
         commands.put( "register", new Register() );
         commands.put( "choice", new ChoiceJ());
         commands.put( "build", new HouseDim());
-        //commands.put("build", new OrderJ());
-        commands.put("order", new OrderJ());
+        commands.put( "order", new OrderJ());
+        commands.put( "showorder", new OrderOutJ());
     }
 
     static Command from( HttpServletRequest request ) {
@@ -25,6 +25,10 @@ abstract class Command {
             initCommands();
         }
         return commands.getOrDefault(commandName, new UnknownCommand() );
+        //getOrDefault(Object key, V defaultValue)
+        //Returns the value to which the specified key is mapped,
+        // or defaultValue if this map contains no mapping for the key.
+
     }
 
     abstract String execute( HttpServletRequest request, HttpServletResponse response ) 
