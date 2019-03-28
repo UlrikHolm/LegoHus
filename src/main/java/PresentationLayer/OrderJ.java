@@ -27,6 +27,8 @@ public class OrderJ extends Command {
         LocalDateTime timeNow = LocalDateTime.now();
         String timeNowS = timeNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
+        session.getAttribute("user");
+
         Order tempOorder =new Order(timeNowS,2,length, width, height,"no");
 
         OrderMapper.createOrder(tempOorder);
