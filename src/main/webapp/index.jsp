@@ -1,4 +1,4 @@
-<%-- 
+<%@ page import="java.util.ArrayList" %><%--
     Document   : index
     Created on : Aug 22, 2017, 2:01:06 PM
     Author     : kasper
@@ -60,5 +60,43 @@
                out.println(error);
            }
         %>
+
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
+
+
+        <div class="form-group">
+            <select class="custom-select">
+                <option selected="">Open this select menu</option>
+
+                <c:forEach items="${requestScope.navnPÅListe}" var="ListeElement" >
+
+                    <option value=${ListeElement.EnMetode()}> ${ListeElement.EnMetode()}   </option>
+
+                </c:forEach>
+            </select>
+        </div>
+
+
+
+
+        ____________________
+
+
+        <%
+            ArrayList<String> numList = new ArrayList<>();
+            numList.add("en");
+            numList.add("to");
+            numList.add("tre");
+            session.setAttribute("numList", numList);
+        %>
+
+        <c:forEach items="${numList}" var="tal" >
+            <c:out value= "${tal}"  ></c:out>
+
+        </c:forEach>
+
+
+
     </body>
 </html>
