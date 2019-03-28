@@ -19,7 +19,7 @@
 
             <div class="col-md-3 text-center">
                 <label>Længde:</label>
-                <select class="form-control" name="lenght">
+                <select class="form-control" name="length">
                     <option value="0" disabled selected>Vælg værdi
                              <%
          
@@ -28,8 +28,8 @@
                                  //String navn = "lenght";
                                  String tal = Integer.toString(i);
 
-                                 lenghtOption = "<option value=\"lenght\">numberI</option>";
-                                 lenghtOption = lenghtOption.replace("lenght",tal);
+                                 lenghtOption = "<option value=\"length\">numberI</option>";
+                                 lenghtOption = lenghtOption.replace("length",tal);
                                  lenghtOption = lenghtOption.replace("numberI",tal);
                                  out.println(lenghtOption);
                              }

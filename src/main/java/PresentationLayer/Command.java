@@ -15,6 +15,7 @@ abstract class Command {
         commands.put( "register", new Register() );
         commands.put( "choice", new ChoiceJ());
         commands.put( "build", new HouseDim());
+        //commands.put("build", new OrderJ());
         commands.put("order", new OrderJ());
     }
 

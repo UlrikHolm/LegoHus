@@ -4,10 +4,7 @@ public class Calculate {
 
     public static  int[] blocks (int length, int width, int high) {
 
-        /*int length = house.getLenght();
-        int width = house.getWidth();
-        int high = house.getHeight();
-*/        int metode = 1;
+        int metode = 1;
         int[] result = new int[3];
         String[] prString = new String[4];
 

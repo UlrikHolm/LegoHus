@@ -15,22 +15,27 @@ public class HouseDim extends Command {
 
         System.out.println("Er i HouseDim");
 
-        int lenght = Integer.parseInt(request.getParameter("lenght"));
+        int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
         int height = Integer.parseInt(request.getParameter("height"));
 
-        System.out.println("Længde som int = "+lenght);
+        HttpSession session = request.getSession();
+        session.setAttribute("length", length);
+        session.setAttribute("width", width);
+        session.setAttribute("height", height);
+
+        System.out.println("Længde som int = "+length);
         System.out.println("Bredde som int = "+width);
         System.out.println("Højde som int = "+height);
 
-        int[] sumBlocks = Calculate.blocks(lenght, width, height);
-        HttpSession session = request.getSession();
+        int[] sumBlocks = Calculate.blocks(length, width, height);
+
         session.setAttribute( "block4", sumBlocks[0]);
         session.setAttribute( "block2", sumBlocks[1]);
         session.setAttribute( "block1", sumBlocks[2]);
 
         session.setAttribute("height", height);
-        session.setAttribute("printAll",Calculate.printAll(lenght, width, height));
+        session.setAttribute("printAll",Calculate.printAll(length, width, height));
 
         return "showblocks" + "page";
     }
