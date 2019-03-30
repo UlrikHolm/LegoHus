@@ -14,5 +14,22 @@
 
 
 Tak for din order.
+
+<td>
+    <form name="choice" action="FrontController" method="POST">
+        <input type="hidden" name="command" value="choice">
+        Byg hus:<br>
+        <input type="submit" value="Submit">
+    </form>
+</td>
+
+<td>
+    <form name="choice" action="FrontController" method="POST">
+        <input type="hidden" name="command" value="logout">
+        Log Out:<br>
+        <input type="submit" value="Submit">
+    </form>
+</td>
+
 </body>
 </html>

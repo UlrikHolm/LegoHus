@@ -1,12 +1,15 @@
 package DBAccess;
 
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.Order;
 import FunctionLayer.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  The purpose of UserMapper is to...
@@ -42,18 +45,48 @@ public class UserMapper {
             ps.setString( 1, email );
             ps.setString( 2, password );
             ResultSet rs = ps.executeQuery();
-            if ( rs.next() ) {
+            if ( rs.next() ) { // hvis der værdier i resultSet
                 String role = rs.getString( "role" );
                 int id = rs.getInt( "user_id" );
                 User user = new User( email, password, role );
                 user.setId( id );
                 return user;
-            } else {
+            } else {  // resultSet er tomt
                 throw new LoginSampleException( "Could not validate user" );
             }
         } catch ( ClassNotFoundException | SQLException ex ) {
             throw new LoginSampleException(ex.getMessage());
         }
     }
+
+    public static List<User> loadUser() {
+
+        List<User> userList = new ArrayList<>();
+
+        try {
+            Connection con = Connector.connection();
+            String sql = "SELECT * FROM lego.user";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery(sql);
+
+            while (resultSet.next()) {
+                User user = new User
+                        (resultSet.getInt("user_id"),
+                         resultSet.getString("email"),
+                         resultSet.getString("password"),
+                         resultSet.getString("role"));
+
+                userList.add(user);
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+
+    }
+
 
 }

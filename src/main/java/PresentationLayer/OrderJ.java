@@ -38,7 +38,7 @@ public class OrderJ extends Command {
             return "orderconfirm" + "page";
 
         } else {
-            return "index";
+            return "reset" + "page";
         }
     }
 }

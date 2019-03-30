@@ -6,24 +6,25 @@ import FunctionLayer.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderMapper {
 
-    public static void createOrder( Order order ) throws LoginSampleException {
+    public static void createOrder(Order order) throws LoginSampleException {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO `lego`.`order` (`date`, `user_id`, `length`, `width`, `heigth`, `shipped`) VALUES (?, ?, ?, ?, ?, ?)";
-            ps = con.prepareStatement( SQL, Statement.RETURN_GENERATED_KEYS );
-            ps.setString( 1, order.getDate());
-            ps.setInt( 2, order.getuserID());
-            ps.setInt( 3, order.getLength());
-            ps.setInt( 4, order.getWidth());
-            ps.setInt( 5, order.getHeigth());
-            ps.setString( 6, order.getShipped());
+            String SQL = "INSERT INTO `lego`.`order` (`date`, `user_id`, `length`, `width`, `height`, `shipped`) VALUES (?, ?, ?, ?, ?, ?)";
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, order.getDate());
+            ps.setInt(2, order.getuserID());
+            ps.setInt(3, order.getLength());
+            ps.setInt(4, order.getWidth());
+            ps.setInt(5, order.getheight());
+            ps.setString(6, order.getShipped());
             ps.executeUpdate();
             //ResultSet ids = ps.getGeneratedKeys();
             //ids.next();
@@ -35,56 +36,33 @@ public class OrderMapper {
             e.printStackTrace();
         }
 
-
-
         /*catch ( SQLException | ClassNotFoundException ex ) {
             throw new LoginSampleException( ex.getMessage() );
         }*/
-
-
     }
 
-/*
 
-    public static void createOrderAndLines(ArrayList<OrderLinje> kurv, String timeNow, Bruger bruger, int totalSum ){
-        int ordreID = 0;
-        Connection connection = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        String sqlOrder = "INSERT INTO `cupcake`.`Ordre` (`tidspunkt`, `bruger_id`, `total_sum`) VALUES (?, ?, ?)";
+    public static List<Order> loadOrder() {
+
+        List<Order> orderList = new ArrayList<>();
+
         try {
             Connection con = Connector.connection();
+            String sql = "SELECT * FROM lego.order";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery(sql);
 
-            ps = con.prepareStatement(sqlOrder, Statement.RETURN_GENERATED_KEYS);
+            while (resultSet.next()) {
+                Order order = new Order
+                        (resultSet.getInt("order_id"),
+                                resultSet.getString("date"),
+                                resultSet.getInt("user_id"),
+                                resultSet.getInt("length"),
+                                resultSet.getInt("width"),
+                                resultSet.getInt("height"),
+                                resultSet.getString("shipped"));
 
-
-            ps.setString(1, timeNow);
-            ps.setInt(2, bruger.getBrugerID());
-            ps.setInt(3, totalSum);
-            ps.executeUpdate();
-            rs = ps.getGeneratedKeys();
-
-            if (rs.next()){
-                ordreID = rs.getInt(1);
-                String sqlOrderLines ="INSERT INTO `cupcake`.`OrdreLinjer` (`ordre_id`, `top_id`, `bund_id`, `antal`, `pris_ialt`) VALUES (?, ?, ?, ?, ?);";
-
-                for (int i = 0; i <kurv.size() ; i++) {
-                    ps = con.prepareStatement(sqlOrderLines);
-                    ps.setInt(1, ordreID);
-                    ps.setInt(2, kurv.get(i).getTopID());
-                    ps.setInt(3, kurv.get(i).getBundID());
-                    ps.setInt(4, kurv.get(i).getAntal());
-                    ps.setInt(5, kurv.get(i).getPrisIalt());
-                    ps.executeUpdate();
-                }
-
-                String sqlSaldo = "UPDATE cupcake.Bruger SET saldo = ? WHERE (bruger_id = ?);";
-                ps = con.prepareStatement(sqlSaldo);
-
-                ps.setInt(1, bruger.getSaldo());
-                ps.setInt(2, bruger.getBrugerID());
-                ps.executeUpdate();
-
+                orderList.add(order);
             }
 
         } catch (ClassNotFoundException e) {
@@ -92,8 +70,31 @@ public class OrderMapper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return orderList;
+
     }
 
-*/
 
+    public static void markSend(String date, int orderID) throws LoginSampleException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection con = Connector.connection();
+            String SQL = "UPDATE `lego`.`order` SET `shipped` = ? WHERE (`order_id` = ?);";
+            ps = con.prepareStatement(SQL);
+            //ps = con.prepareStatement( SQL, Statement.RETURN_GENERATED_KEYS );
+            ps.setString(1, date);
+            ps.setInt(2, orderID);
+            ps.executeUpdate();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }

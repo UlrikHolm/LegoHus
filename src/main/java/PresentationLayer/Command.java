@@ -17,6 +17,9 @@ abstract class Command {
         commands.put( "build", new HouseDim());
         commands.put( "order", new OrderJ());
         commands.put( "showorder", new OrderOutJ());
+        commands.put( "logout", new LogoutJ());
+        commands.put( "sendorder", new FinishOrderJ());
+
     }
 
     static Command from( HttpServletRequest request ) {

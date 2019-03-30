@@ -7,27 +7,51 @@ public class Order {
     private int userID;
     private int length;
     private int width;
-    private int heigth;
+    private int height;
     private String shipped;
 
 
-    public Order(int orderID, String date, int userID, int length, int width, int heigth, String shipped) {
+    public Order(int orderID, String date, int userID, int length, int width, int height, String shipped) {
         this.orderID = orderID;
         this.date = date;
         this.userID = userID;
         this.length = length;
         this.width = width;
-        this.heigth = heigth;
+        this.height = height;
         this.shipped = shipped;
     }
 
-    public Order(String date, int userID, int length, int width, int heigth, String shipped) {
+    public Order(String date, int userID, int length, int width, int height, String shipped) {
         this.date = date;
         this.userID = userID;
         this.length = length;
         this.width = width;
-        this.heigth = heigth;
+        this.height = height;
         this.shipped = shipped;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderID=" + orderID +
+                ", date='" + date + '\'' +
+                ", userID=" + userID +
+                ", length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                ", shipped='" + shipped + '\'' +
+                '}';
+    }
+
+    public String toString1() {
+        return "Order{" +
+                ", date='" + date + '\'' +
+                ", userID=" + userID +
+                ", length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                ", shipped='" + shipped + '\'' +
+                '}';
     }
 
     public int getOrderID() {
@@ -70,12 +94,12 @@ public class Order {
         this.width = width;
     }
 
-    public int getHeigth() {
-        return heigth;
+    public int getheight() {
+        return height;
     }
 
-    public void setHeigth(int heigth) {
-        this.heigth = heigth;
+    public void setheight(int height) {
+        this.height = height;
     }
 
     public String getShipped() {
