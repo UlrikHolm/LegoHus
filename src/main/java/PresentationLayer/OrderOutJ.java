@@ -31,7 +31,6 @@ public class OrderOutJ extends Command {
             System.out.println(customerOrder.get(i).toString());
 
         }
-
         return "showorder" + "page";
     }
 }

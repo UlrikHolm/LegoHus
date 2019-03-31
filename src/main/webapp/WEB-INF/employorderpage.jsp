@@ -23,17 +23,13 @@
 
         <div class="col-md-3 text-center">
             <label>Bruger</label>
+            <select class="form-control" name="orderID">
+                <option value="0" disabled selected>Vælg order
 
-
-                   <%
+                <%
                        HashMap<String, String> userOrderList =
                                   (HashMap<String, String>) session.getAttribute("userOrder");
 
-                       if (userOrderList != null){
-                   %>
-                       <select class="form-control" name="orderID">
-                              <option value="0" disabled selected>Vælg order
-                   <%
                        for (String i : userOrderList.keySet()) {
                            //System.out.println("key: " + i + " value: " + userOrderList.get(i));
                            String userOrderOption = "";
@@ -45,8 +41,7 @@
                            out.println(userOrderOption);
                            }
 
-                       } else
-                   %>
+                %>
 
                     <div class="col-md-3 text-center">
                         <label>&zwnj;</label>
@@ -54,26 +49,9 @@
                     </div>
 
                   </select>
-
-
-
-                   <%
-                        {
-                           String answer = (String) session.getAttribute("noOrder");
-                           out.println(answer);
-                       }
-
-                   %>
-
-
         </div>
-
-
-
     </form>
 </td>
-
-
 
 </body>
 </html>

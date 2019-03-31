@@ -18,25 +18,31 @@ public class Login extends Command {
 
     @Override
     String execute( HttpServletRequest request, HttpServletResponse response ) throws LoginSampleException {
-        String email = request.getParameter( "email" );
-        String password = request.getParameter( "password" );
-        User user = LogicFacade.login( email, password );
+
         HttpSession session = request.getSession();
-        session.setAttribute( "user", user );
-        session.setAttribute( "role", user.getRole() );
+        User userNow = (User) session.getAttribute("user");
+        if (userNow == null) {
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            User user = LogicFacade.login(email, password);
 
-        if (user.getRole().equals("employee")){
-            List<User> userList = UserMapper.loadUser();
-            session.setAttribute("userList",userList);
+            session.setAttribute("user", user);
+            session.setAttribute("role", user.getRole());
 
-            for (int i = 0; i <userList.size() ; i++) {
-                System.out.println(userList.get(i).toString());
+            if (user.getRole().equals("employee")) {
+                List<User> userList = UserMapper.loadUser();
+                session.setAttribute("userList", userList);
+
+                for (int i = 0; i < userList.size(); i++) {
+                    System.out.println(userList.get(i).toString());
+                }
+
             }
+            return user.getRole() + "page";
 
+        } else {
+            return userNow.getRole() + "page";
         }
 
-
-        return user.getRole() + "page";
     }
-
 }

@@ -42,23 +42,37 @@ public class FinishOrderJ extends Command {
                         userOrderList.put(Integer.toString(fullOrder.get(i).getOrderID()),
                                 fullOrder.get(i).toString1());
                         session.setAttribute("userOrder", userOrderList);
-                    } else {
-                        String noOrder = "Ingen order eller alle er afsendt";
-                        session.setAttribute("noOrder", noOrder);
-                        //System.out.println("Ingen order");
                     }
                 }
-                for (String i: userOrderList.keySet()) {
-                    System.out.println(i + "  " + userOrderList.get(i));
+
+                if (userOrderList!=null) {
+
+                    for (String i: userOrderList.keySet()) {
+                        System.out.println(i + "  " + userOrderList.get(i));
+                    }
+                    fileReturn = "employorder" + "page";
+                } else {
+                    String noOrder = "Ingen order eller alle er afsendt";
+                    session.setAttribute("noOrder", noOrder);
+                    //System.out.println("Ingen order");
+                    fileReturn = "noemployorder" + "page";
                 }
 
-                fileReturn = "employorder" + "page";
+
+
+
+
+
                 break;
 
             case "order":
                 System.out.println("Er i FinishOrderJ under pkt. order");
 
-                int tempOrderId = Integer.parseInt(request.getParameter("orderID"));
+                String tempOrderIdS = request.getParameter("orderID");
+
+                System.out.println("OrderID = " + tempOrderIdS);
+
+                int tempOrderId = Integer.parseInt(tempOrderIdS);
 
                 LocalDateTime timeNow = LocalDateTime.now();
                 String timeNowS = timeNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

@@ -13,8 +13,12 @@
         <title>Employee home page</title>
     </head>
     <body>
-        
-        <h1>Hello <%=request.getParameter( "email")%> </h1>
+
+    <%;
+      User userNow = (User) session.getAttribute("user");
+    %>
+
+        <h1>Hello <% out.println(" " + userNow.getEmail());%> </h1>
         You are now logged in as a EMPLOYEE of our wonderful site.
         <td>
             <form name="choice" action="FrontController" method="POST">
